@@ -6,7 +6,7 @@ const PageProducts = ({ products }) => {
         <div>
             {products.map( (product, index) => {
                 return (
-                <div>
+                <div key={index}>
                     <p>{product.title}</p>
                  </div>
                 )   

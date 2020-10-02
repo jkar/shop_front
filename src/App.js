@@ -8,7 +8,7 @@ function App() {
   const [products, setProducts] = useState([]);
   const [totalPages, setTotalPages] = useState();
   const [limit, setLimit] = useState(4);
-  const [curretPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
   console.log('totalPages', totalPages);
   console.log('products', products);
@@ -32,7 +32,7 @@ function App() {
     const request = axios.get('http://localhost:3001/api/products/count', { params: params });
     request.then( res => {
       requestPageProduct(limit, 0);
-      setTotalPages(res.data.numberOfPages);
+      setTotalPages(parseInt(res.data.numberOfPages));
     })
   };
 
@@ -42,7 +42,7 @@ function App() {
 
   return (
     <div className="App">
-        <Products products={products} setProducts={setProducts} curretPage={curretPage} limit={limit} />
+        <Products products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} />
     </div>
   );
 }
