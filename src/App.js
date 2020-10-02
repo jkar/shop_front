@@ -8,6 +8,7 @@ function App() {
   const [products, setProducts] = useState([]);
   const [totalPages, setTotalPages] = useState();
   const [limit, setLimit] = useState(4);
+  const [curretPage, setCurrentPage] = useState(1);
 
   console.log('totalPages', totalPages);
   console.log('products', products);
@@ -41,7 +42,7 @@ function App() {
 
   return (
     <div className="App">
-        <Products />
+        <Products products={products} setProducts={setProducts} curretPage={curretPage} limit={limit} />
     </div>
   );
 }
