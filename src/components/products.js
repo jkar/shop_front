@@ -2,10 +2,18 @@ import React from 'react';
 import PageProducts from './pageProducts';
 import ShowButtons from './showButtons';
 
-const Products = ({ products, setProducts, currentPage, setCurrentPage, totalPages }) => {
+const Products = ({ limit, products, setProducts, currentPage, setCurrentPage, totalPages, requestPageProduct, requestedPages }) => {
 
     const changePage = (num) => {
         setCurrentPage(num);
+
+        if (requestedPages[num-1] === false) {
+
+        let offset = (num -1) * limit;
+        requestPageProduct(limit, offset, num-1, '');
+        } else {
+            console.log('GOTTENNNNNNNNNNN')
+        }
     }
 
     console.log('currentPage', currentPage);
@@ -13,7 +21,7 @@ const Products = ({ products, setProducts, currentPage, setCurrentPage, totalPag
     return (
         <div>
             <p>products</p>
-            <PageProducts products={products} />
+            <PageProducts products={products} currentPage={currentPage} limit={limit} />
             <ShowButtons totalPages={totalPages} products={products} changePage={changePage} />
         </div>
     )
