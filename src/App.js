@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Products from './components/products';
+import FormProduct from './components/formProduct';
 import axios from 'axios';
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
   return (
     <div className="App">
         <Products products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages}/>
+        <FormProduct />
     </div>
   );
 }
