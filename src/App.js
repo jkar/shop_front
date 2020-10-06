@@ -56,12 +56,19 @@ function App() {
 
   useEffect(() => {
     requestTotalPages(limit);
+
+    let arr = [];
+    arr.splice(3, 0, 'item')
+    console.log('arrrrrrr', arr)
+
+
   }, []);
 
   return (
     <div className="App">
         <Products products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages}/>
         <FormProduct />
+        {/* <img src="http://localhost:3001/uploads/1602009038828-Screenshot%20(4).png" /> */}
     </div>
   );
 }

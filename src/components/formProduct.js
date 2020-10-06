@@ -5,6 +5,7 @@ const FormProduct = () => {
 
     const [file, setFile] = useState(null);
     const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
 
 
 
@@ -13,6 +14,7 @@ const FormProduct = () => {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('title', title);
+        formData.append('description', description);
         // console.log(formData.get("file"));
         // console.log(formData.get("title"));
         // console.log('formData', formData);
@@ -34,6 +36,10 @@ const FormProduct = () => {
 
     const onChangeTitle = (e) => {
         setTitle(e.target.value);
+    };
+
+    const onChangeDescription = (e) => {
+        setDescription(e.target.value);
     }
 
     return (
@@ -42,6 +48,8 @@ const FormProduct = () => {
             <input type="file" name="file" onChange= {onChange} />
             <label>title</label>
             <input type="text" name="title" value={title} onChange={onChangeTitle} />
+            <label>description</label>
+            <input type="text" name="description" value={description} onChange={onChangeDescription} />
             <button type="submit">Upload to DB</button>
     </form>
     )
