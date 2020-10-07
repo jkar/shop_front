@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Products from './components/products';
 import FormProduct from './components/formProduct';
+import Header from './components/Header';
+import About from './components/About';
+import Main from './components/Main';
 import axios from 'axios';
 
 function App() {
@@ -73,9 +77,15 @@ function App() {
 
   return (
     <div className="App">
-        <Products products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages}/>
-        <FormProduct />
-        {/* <img src="http://localhost:3001/uploads/1602009038828-Screenshot%20(4).png" /> */}
+        {/* <Header /> */}
+        {/* <Main products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages} /> */}
+        {/* <Products products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages}/> */}
+        {/* <FormProduct /> */}
+        <Switch>
+          <Route path="/" component={() => <Main products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages} /> } exact />
+          <Route path="/about" component={About} />
+          <Route component={Error} />
+        </Switch>
     </div>
   );
 }
