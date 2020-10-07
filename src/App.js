@@ -43,6 +43,7 @@ function App() {
         rp[pg] = true;
         let prod = [...products];
         prod[pg] = res.data;
+
         setProducts(prod);
         setRequestedPages(rp);
       }
