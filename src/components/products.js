@@ -1,5 +1,5 @@
 import React from 'react';
-import PageProducts from './pageProducts';
+import PageProducts2 from './pageProducts2';
 import ShowButtons from './showButtons';
 
 const Products = ({ limit, products, setProducts, currentPage, setCurrentPage, totalPages, requestPageProduct, requestedPages }) => {
@@ -21,7 +21,7 @@ const Products = ({ limit, products, setProducts, currentPage, setCurrentPage, t
     return (
         <div>
             <p>products</p>
-            <PageProducts products={products} currentPage={currentPage} limit={limit} />
+            <PageProducts2 products={products} currentPage={currentPage} limit={limit} />
             <ShowButtons totalPages={totalPages} products={products} changePage={changePage} />
         </div>
     )

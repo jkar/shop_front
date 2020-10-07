@@ -13,7 +13,7 @@ function App() {
   const [requestedPages, setRequestedPages] = useState([]);
 
   // console.log('totalPages', totalPages);
-  // console.log('products', products);
+  console.log('products', products);
   // console.log('requestedPages', requestedPages);
 
   const requestPageProduct = (lmt, ofst, pg, frst) => {
@@ -25,19 +25,25 @@ function App() {
     const request = axios.get('http://localhost:3001/api/products', { params : params } );
     request.then( res => {
       console.log('DATAAAAAAA', res.data)
-      let prod = [...products].concat(res.data);
+      //let prod = [...products].concat(res.data);
 
-      setProducts(prod);
+      //setProducts(prod);
 
       if (frst !== '' ) {
         let rp = [true];
+        let prod = [res.data];
         for (var x = 1; x < frst; x++) {
           rp.push(false);
+          prod.push([]);
         }
+        setProducts(prod);
         setRequestedPages(rp);
       } else {
         let rp = [...requestedPages];
         rp[pg] = true;
+        let prod = [...products];
+        prod[pg] = res.data;
+        setProducts(prod);
         setRequestedPages(rp);
       }
     });
