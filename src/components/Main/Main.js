@@ -1,7 +1,7 @@
 import React from 'react';
-import Products from './products';
-import FormProduct from './formProduct';
-import Header from './Header';
+import Products from '../products';
+import FormProduct from '../formProduct';
+import Header from '../Header/Header';
 
 const Main = ({ products, setProducts, currentPage, setCurrentPage, limit, totalPages, requestPageProduct, requestedPages }) => {
 

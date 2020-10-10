@@ -3,10 +3,13 @@ import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Products from './components/products';
 import FormProduct from './components/formProduct';
-import Header from './components/Header';
+import Header from './components/Header/Header';
 import About from './components/About';
-import Main from './components/Main';
+import Main from './components/Main/Main';
 import axios from 'axios';
+import Contact from './components/contact';
+
+
 
 function App() {
 
@@ -84,6 +87,7 @@ function App() {
         <Switch>
           <Route path="/" component={() => <Main products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages} /> } exact />
           <Route path="/about" component={About} />
+          <Route path="/contact" component={Contact} />
           <Route component={Error} />
         </Switch>
     </div>
