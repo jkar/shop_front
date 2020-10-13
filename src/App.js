@@ -7,12 +7,14 @@ import Header from './components/Header/Header';
 import About from './components/About';
 import Main from './components/Main/Main';
 import axios from 'axios';
-import Contact from './components/contact';
+import LogIn from './components/logIn';
+import SignUp from './components/SignUp/signUp';
 
 
 
 function App() {
 
+  const [user, setUser] = useState(null);
   const [products, setProducts] = useState([]);
   const [totalPages, setTotalPages] = useState();
   const [limit, setLimit] = useState(4);
@@ -22,6 +24,7 @@ function App() {
   // console.log('totalPages', totalPages);
   console.log('products', products);
   // console.log('requestedPages', requestedPages);
+  console.log('user', user);
 
   const requestPageProduct = (lmt, ofst, pg, frst) => {
     console.log('OOOOFFFFFFSSSSSSSS', ofst)
@@ -53,6 +56,9 @@ function App() {
 
         setProducts(prod);
         setRequestedPages(rp);
+
+        
+
       }
     });
   };
@@ -71,12 +77,22 @@ function App() {
   useEffect(() => {
     requestTotalPages(limit);
 
-    let arr = [];
-    arr.splice(3, 0, 'item')
-    console.log('arrrrrrr', arr)
+    // let arr = [];
+    // arr.splice(3, 0, 'item')
+    // console.log('arrrrrrr', arr)
 
 
   }, []);
+
+  useEffect(() => {
+    
+    const loggedUserJSON = window.localStorage.getItem('loggedUser');
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON);
+      setUser(user);
+      // noteService.setToken(user.token)
+    }
+  }, [])
 
   return (
     <div className="App">
@@ -84,10 +100,12 @@ function App() {
         {/* <Main products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages} /> */}
         {/* <Products products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages}/> */}
         {/* <FormProduct /> */}
+        { user === null ? null : <p>is logged in</p>}
         <Switch>
           <Route path="/" component={() => <Main products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages} /> } exact />
           <Route path="/about" component={About} />
-          <Route path="/contact" component={Contact} />
+          <Route path="/login" component={() => <LogIn user={user} setUser={setUser} /> } />
+          <Route path="/signup" component={SignUp} />
           <Route component={Error} />
         </Switch>
     </div>
