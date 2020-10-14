@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import Header from '../Header/Header';
 
-const SignUp = () => {
+const SignUp = ({ user }) => {
 
     const [name, SetName] = useState('');
     const [username, setUsername] = useState('');
@@ -37,7 +37,7 @@ const SignUp = () => {
 
     return (
         <>
-            <Header />
+            <Header user={user} />
             <h1>Sign Up</h1>
             <form onSubmit={onSubmit} >
                 <label>Name</label>

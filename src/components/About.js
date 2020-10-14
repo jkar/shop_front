@@ -1,10 +1,10 @@
 import React from 'react';
 import Header from './Header/Header';
 
-const About = () => {
+const About = ({ user }) => {
     return (
         <div>
-            <Header />
+            <Header user={user} />
             <p>About</p>
         </div>
     )

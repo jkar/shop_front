@@ -44,10 +44,10 @@ const LogIn = ({ user, setUser }) => {
         }
     };
 
-    const logOut = () => {
-        window.localStorage.removeItem('loggedUser');
-        setUser(null);
-    };
+    // const logOut = () => {
+    //     window.localStorage.removeItem('loggedUser');
+    //     setUser(null);
+    // };
 
     const onTest = async (e) => {
         e.preventDefault();
@@ -83,16 +83,17 @@ const LogIn = ({ user, setUser }) => {
 
     return (
         <div>
-            <Header /> 
-        <form onSubmit={logIn}>
-            <label>Username</label>
-            <input type="text" value={username} onChange={changeUsername} />
-            <label>Password</label>
-            <input type="password" value={password} onChange={changePassword} />
-            <input type="submit" name="Submit" />
-        </form>
-        <button name="testing" onClick={onTest}>test</button>
-        <button onClick={logOut}>Log Out</button>
+            <Header user={user} /> 
+            <h1>Log in</h1>
+            <form onSubmit={logIn}>
+                <label>Username</label>
+                <input type="text" value={username} onChange={changeUsername} />
+                <label>Password</label>
+                <input type="password" value={password} onChange={changePassword} />
+                <input type="submit" name="Submit" />
+            </form>
+            <button name="testing" onClick={onTest}>test</button>
+            {/* <button onClick={logOut}>Log Out</button> */}
         </div>
     
     )

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Header from '../Header/Header';
 
-const FormProduct = () => {
+const FormProduct = ({ user }) => {
 
     const [file, setFile] = useState(null);
     const [title, setTitle] = useState('');
@@ -43,15 +44,18 @@ const FormProduct = () => {
     }
 
     return (
-        <form onSubmit={onFormSubmit}>
-            <label>File Upload</label>
-            <input type="file" name="file" onChange= {onChange} />
-            <label>title</label>
-            <input type="text" name="title" value={title} onChange={onChangeTitle} />
-            <label>description</label>
-            <input type="text" name="description" value={description} onChange={onChangeDescription} />
-            <button type="submit">Upload to DB</button>
-    </form>
+        <>
+            <Header user={user} />
+            <form onSubmit={onFormSubmit}>
+                <label>File Upload</label>
+                <input type="file" name="file" onChange= {onChange} />
+                <label>title</label>
+                <input type="text" name="title" value={title} onChange={onChangeTitle} />
+                <label>description</label>
+                <input type="text" name="description" value={description} onChange={onChangeDescription} />
+                <button type="submit">Upload to DB</button>
+            </form>
+        </>
     )
 }
 

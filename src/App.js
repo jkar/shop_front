@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Products from './components/products';
-import FormProduct from './components/formProduct';
+import FormProduct from './components/FormProduct/formProduct';
 import Header from './components/Header/Header';
 import About from './components/About';
 import Main from './components/Main/Main';
@@ -94,18 +94,21 @@ function App() {
     }
   }, [])
 
+  const logOut = () => {
+    window.localStorage.removeItem('loggedUser');
+    setUser(null);
+  };
+
   return (
     <div className="App">
-        {/* <Header /> */}
-        {/* <Main products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages} /> */}
-        {/* <Products products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages}/> */}
-        {/* <FormProduct /> */}
-        { user === null ? null : <p>is logged in</p>}
+        { user === null ? null : <p>{user.data.name} is logged in</p>}
+        { user === null ? null : <button onClick={logOut}>Log Out</button> }
         <Switch>
-          <Route path="/" component={() => <Main products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages} /> } exact />
-          <Route path="/about" component={About} />
+          <Route path="/" component={() => <Main products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages} user={user} /> } exact />
+          <Route path="/about" component={() => <About user={user} /> } />
           <Route path="/login" component={() => <LogIn user={user} setUser={setUser} /> } />
-          <Route path="/signup" component={SignUp} />
+          <Route path="/signup" component={() => <SignUp user={user} /> } />
+          <Route path="/formProduct" component={() => <FormProduct user={user} />} />
           <Route component={Error} />
         </Switch>
     </div>
