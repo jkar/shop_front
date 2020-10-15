@@ -6,3 +6,6 @@ nav {
 	margin: 0 auto;
 	display: flex;
 }
+.test {
+	display: none;
+}
