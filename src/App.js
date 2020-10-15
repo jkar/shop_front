@@ -101,8 +101,10 @@ function App() {
 
   return (
     <div className="App">
+      <section class="upperHeader">
         { user === null ? null : <p>{user.data.name} is logged in</p>}
         { user === null ? null : <button onClick={logOut}>Log Out</button> }
+      </section>  
         <Switch>
           <Route path="/" component={() => <Main products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages} user={user} /> } exact />
           <Route path="/about" component={() => <About user={user} /> } />
