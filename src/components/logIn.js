@@ -52,6 +52,8 @@ const LogIn = ({ user, setUser }) => {
     const onTest = async (e) => {
         e.preventDefault();
 
+        try {
+
         const params = {
             un : 'un',
             pw : 'pw'
@@ -67,6 +69,9 @@ const LogIn = ({ user, setUser }) => {
             console.log('a 401 status')
         }
         console.log('ress', res.data);
+        } catch (err) {
+            console.log("ERROR", err)
+        }
     };
 
     const setToken = newToken => {
