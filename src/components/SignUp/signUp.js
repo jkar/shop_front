@@ -12,14 +12,26 @@ const SignUp = ({ user }) => {
 
         e.preventDefault();
 
-        const params = {
-            name : name,
-            username : username,
-            password : password
-        }
+        try {
 
-        const res = await axios.post('http://localhost:3001/api/user', { params : params } );
-        console.log('ress', res.data);
+            // const params = {
+            //     name : name,
+            //     username : username,
+            //     password : password
+            // }
+
+            SetName('');
+            setUsername('');
+            setPassword('');
+
+            const res = await axios.post('http://localhost:3001/api/user', { name : name, username : username, password : password });
+            console.log('ress', res.data);
+        } catch (err) {
+            if (err.response) {
+                console.log(err.response.data);
+            }
+
+        }
         
     };
 
