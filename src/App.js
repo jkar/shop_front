@@ -20,6 +20,7 @@ function App() {
   const [limit, setLimit] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
   const [requestedPages, setRequestedPages] = useState([]);
+  const [errorSuccessMessage, setErrorSuccessMessage ] = useState('');
 
   // console.log('totalPages', totalPages);
   console.log('products', products);
@@ -106,7 +107,7 @@ function App() {
         <Switch>
           <Route path="/" component={() => <Main products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages} user={user} /> } exact />
           <Route path="/about" component={() => <About user={user} /> } />
-          <Route path="/login" component={() => <LogIn user={user} setUser={setUser} /> } />
+          <Route path="/login" component={() => <LogIn user={user} setUser={setUser} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage} /> } />
           <Route path="/signup" component={() => <SignUp user={user} /> } />
           <Route path="/formProduct" component={() => <FormProduct user={user} />} />
           <Route component={Error} />

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Header from './Header/Header';
 
-const LogIn = ({ user, setUser }) => {
+const LogIn = ({ user, setUser, errorSuccessMessage, setErrorSuccessMessage }) => {
 
     // let token;
 
@@ -26,12 +26,17 @@ const LogIn = ({ user, setUser }) => {
             setUsername('');
             setPassword('');
 
-            const params = {
+            // const params = {
+            //     username : username,
+            //     password : password
+            // }
+
+            // const res = await axios.post('http://localhost:3001/api/login', { params : params } );
+            const res = await axios.post('http://localhost:3001/api/login', 
+            {
                 username : username,
                 password : password
-            }
-
-            const res = await axios.post('http://localhost:3001/api/login', { params : params } );
+            } );
 
 
             window.localStorage.setItem(
@@ -40,7 +45,13 @@ const LogIn = ({ user, setUser }) => {
             setUser(res);
             console.log('ress', res.data);
         } catch (err) {
-            console.log('err', err);
+            if (err.response) {
+                console.log(err.response.data);
+            }
+            setErrorSuccessMessage(err.response.data.error);
+            setTimeout( () => {
+                setErrorSuccessMessage('');
+            }, 3000 );
         }
     };
 
@@ -98,6 +109,7 @@ const LogIn = ({ user, setUser }) => {
                 <input type="submit" name="Submit" />
             </form>
             <button name="testing" onClick={onTest}>test</button>
+            { errorSuccessMessage !== '' ? <p>{errorSuccessMessage}</p> : null }
             {/* <button onClick={logOut}>Log Out</button> */}
         </div>
     
