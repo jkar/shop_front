@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Header from '../Header/Header';
 
-const FormProduct = ({ user }) => {
+const FormProduct = ({ user, errorSuccessMessage, setErrorSuccessMessage }) => {
 
     const [file, setFile] = useState(null);
     const [title, setTitle] = useState('');
@@ -28,6 +28,11 @@ const FormProduct = ({ user }) => {
             .then((response) => {
                 alert("The file is successfully uploaded");
             }).catch((error) => {
+                console.log('error', error.response.data.msg.message)
+                setErrorSuccessMessage(error.response.data.msg.message);
+                setTimeout( () => {
+                    setErrorSuccessMessage('');
+                }, 3000);
         });
     }
 
@@ -54,6 +59,7 @@ const FormProduct = ({ user }) => {
                 <label>description</label>
                 <input type="text" name="description" value={description} onChange={onChangeDescription} />
                 <button type="submit">Upload to DB</button>
+                { errorSuccessMessage !== '' ? <p>{errorSuccessMessage}</p> : null }
             </form>
         </>
     )

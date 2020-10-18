@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Header from './Header/Header';
 
-const LogIn = ({ user, setUser, errorSuccessMessage, setErrorSuccessMessage }) => {
+const LogIn = ({ user, setUser, errorSuccessMessage, setErrorSuccessMessage, history }) => {
 
     // let token;
 
@@ -43,6 +43,7 @@ const LogIn = ({ user, setUser, errorSuccessMessage, setErrorSuccessMessage }) =
                 'loggedUser', JSON.stringify(res)
               );
             setUser(res);
+            history.push('/');
             console.log('ress', res.data);
         } catch (err) {
             if (err.response) {

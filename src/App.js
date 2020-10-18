@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import './App.css';
 import Products from './components/products';
 import FormProduct from './components/FormProduct/formProduct';
@@ -21,6 +21,8 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [requestedPages, setRequestedPages] = useState([]);
   const [errorSuccessMessage, setErrorSuccessMessage ] = useState('');
+
+  const history = useHistory();
 
   // console.log('totalPages', totalPages);
   console.log('products', products);
@@ -107,9 +109,9 @@ function App() {
         <Switch>
           <Route path="/" component={() => <Main products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages} user={user} /> } exact />
           <Route path="/about" component={() => <About user={user} /> } />
-          <Route path="/login" component={() => <LogIn user={user} setUser={setUser} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage} /> } />
+          <Route path="/login" component={() => <LogIn user={user} setUser={setUser} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage}  history={history} /> } />
           <Route path="/signup" component={() => <SignUp user={user} /> } />
-          <Route path="/formProduct" component={() => <FormProduct user={user} />} />
+          <Route path="/formProduct" component={() => <FormProduct user={user} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage} />} />
           <Route component={Error} />
         </Switch>
     </div>
