@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import Header from '../Header/Header';
 
-const SignUp = ({ user, errorSuccessMessage, setErrorSuccessMessage }) => {
+const SignUp = ({ user, errorSuccessMessage, setErrorSuccessMessage, history }) => {
 
     const [name, SetName] = useState('');
     const [username, setUsername] = useState('');
@@ -33,6 +33,11 @@ const SignUp = ({ user, errorSuccessMessage, setErrorSuccessMessage }) => {
             setPassword('');
 
             const res = await axios.post('http://localhost:3001/api/user', { name : name, username : username, password : password });
+            setErrorSuccessMessage('User is signed up successfuly');
+            // history.push('/');
+            setTimeout(() => {
+                setErrorSuccessMessage('');
+            }, 3000);
             console.log('ress', res.data);
         } catch (err) {
             if (err.response) {
