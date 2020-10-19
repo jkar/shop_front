@@ -10,6 +10,7 @@ const Header = ({ user }) => {
         { user === null ? <h1 className="navbar"><Link to="/login">Log in </Link></h1> : null }
         { user === null ? <h1 className="navbar"><Link to="/signup">Sign up</Link></h1> : null }
         { user !== null ? <h1 className="navbar"><Link to="/formProduct">Create Product</Link></h1> : null}
+        { user !== null ? <h1 className="navbar"><Link to="/editeDeleteProduct">Edit/Delete Product</Link></h1> : null}
     </nav>
     )
 }

@@ -10,6 +10,7 @@ import axios from 'axios';
 import LogIn from './components/logIn';
 import SignUp from './components/SignUp/signUp';
 import Product from './components/Product/product';
+import EditDeleteProduct from './components/EditDeleteProduct/editDeleteProduct';
 
 
 
@@ -103,6 +104,7 @@ function App() {
           <Route path="/login" component={() => <LogIn user={user} setUser={setUser} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage}  history={history} /> } />
           <Route path="/signup" component={() => <SignUp user={user} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage} /> } />
           <Route path="/formProduct" component={() => <FormProduct user={user} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage} />} />
+          <Route path="/editeDeleteProduct" component={() => <EditDeleteProduct products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages} user={user} />}></Route>
           <Route path="/products/:id"><Product products={products} currentPage={currentPage} user={user} /></Route>
           <Route component={Error} />
         </Switch>
