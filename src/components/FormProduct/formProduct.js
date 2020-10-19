@@ -28,8 +28,8 @@ const FormProduct = ({ user, errorSuccessMessage, setErrorSuccessMessage }) => {
             .then((response) => {
                 alert("The file is successfully uploaded");
             }).catch((error) => {
-                console.log('error', error.response.data.msg.message)
-                setErrorSuccessMessage(error.response.data.msg.message);
+                console.log('error', error.response.data)
+                setErrorSuccessMessage(error.response.data.msg);
                 setTimeout( () => {
                     setErrorSuccessMessage('');
                 }, 3000);
