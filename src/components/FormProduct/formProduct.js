@@ -12,13 +12,22 @@ const FormProduct = ({ user, errorSuccessMessage, setErrorSuccessMessage }) => {
 
     const onFormSubmit = (e) => {
         e.preventDefault();
+
+        if (file === null || title === '' || description === '') {
+            setErrorSuccessMessage('file or title or description is empty');
+            setTimeout( () => {
+                setErrorSuccessMessage('');
+            }, 3000);
+            return
+        }
+
         const formData = new FormData();
         formData.append('file', file);
         formData.append('title', title);
         formData.append('description', description);
-        // console.log(formData.get("file"));
-        // console.log(formData.get("title"));
-        // console.log('formData', formData);
+        // console.log('FILE',formData.get("file"));
+        // console.log('TITLE',formData.get("title"));
+        // console.log('DESCRIPTION', formData.get("description"));
         const config = {
             headers: {
                 'content-type': 'multipart/form-data',
@@ -27,7 +36,10 @@ const FormProduct = ({ user, errorSuccessMessage, setErrorSuccessMessage }) => {
         };
         axios.post("http://localhost:3001/api/products", formData, config)
             .then((response) => {
-                alert("The file is successfully uploaded");
+                setErrorSuccessMessage('file was uploaded successfuly');
+                setTimeout(() => {
+                    setErrorSuccessMessage('');
+                }, 3000);
             }).catch((error) => {
                 console.log('ERROR', error.response.data)
                 setErrorSuccessMessage(error.response.data.msg);
