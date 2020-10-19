@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 
-const pageProductsForEditDeletion = ({ products, currentPage, limit, user }) => {
+const pageProductsForEditDeletion = ({ products, setProducts, currentPage, limit, user, errorSuccessMessage, setErrorSuccessMessage }) => {
 
     let prods = products[currentPage-1];
     console.log('CurrentProd', prods)
@@ -17,11 +17,28 @@ const pageProductsForEditDeletion = ({ products, currentPage, limit, user }) => 
             const config = {
                 headers: { Authorization: setToken(user.data.token) },
               }
-            //   console.log('DIDDDDDDDDDDDD', id)
-            //   console.log('USERRRR', user.data.token)
               const res = await axios.delete(`http://localhost:3001/api/products/${id}`, config);
+              let p = [...prods];
+              p = p.filter(pr => {
+                  console.log('prid', pr._id)
+                  console.log('prid2', id)
+
+                  return pr._id !== id
+                });
+
+                let pr = [...products];
+                pr[currentPage-1] = p;
+                setErrorSuccessMessage('product is successfully deleted');
+                setTimeout(() => {
+                    setErrorSuccessMessage('')
+                }, 1000);
+                setProducts(pr);
         } catch (err) {
             console.log(err.response.data.msg);
+            setErrorSuccessMessage('product is not deleted..');
+            setTimeout(() => {
+                setErrorSuccessMessage('')
+            }, 1000);
         }
     };
 
@@ -32,6 +49,7 @@ const pageProductsForEditDeletion = ({ products, currentPage, limit, user }) => 
     } else {
         return (
             <div>
+                { errorSuccessMessage !== '' ? <p>{errorSuccessMessage}</p> : null }
                 {prods.map( (product, index) => {
                     
                     return (

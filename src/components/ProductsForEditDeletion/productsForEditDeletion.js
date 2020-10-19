@@ -2,7 +2,7 @@ import React from 'react';
 import PageProductsForEditDeletion from '../PageProductsForEditDeletion/pageProductsForEditDeletion';
 import ShowButtons from '../showButtons';
 
-const ProductsForEditDeletion = ({ user, limit, products, setProducts, currentPage, setCurrentPage, totalPages, requestPageProduct, requestedPages }) => {
+const ProductsForEditDeletion = ({ user, limit, products, setProducts, currentPage, setCurrentPage, totalPages, requestPageProduct, requestedPages, errorSuccessMessage, setErrorSuccessMessage }) => {
 
     const changePage = (num) => {
         setCurrentPage(num);
@@ -21,7 +21,7 @@ const ProductsForEditDeletion = ({ user, limit, products, setProducts, currentPa
     return (
         <div>
             <p>products</p>
-            <PageProductsForEditDeletion user={user} products={products} currentPage={currentPage} limit={limit} />
+            <PageProductsForEditDeletion user={user} products={products} setProducts={setProducts} currentPage={currentPage} limit={limit} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage} />
             <ShowButtons totalPages={totalPages} products={products} changePage={changePage} />
         </div>
     )
