@@ -110,7 +110,7 @@ function App() {
           <Route path="/" component={() => <Main products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages} user={user} /> } exact />
           <Route path="/about" component={() => <About user={user} /> } />
           <Route path="/login" component={() => <LogIn user={user} setUser={setUser} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage}  history={history} /> } />
-          <Route path="/signup" component={() => <SignUp user={user} /> } />
+          <Route path="/signup" component={() => <SignUp user={user} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage} /> } />
           <Route path="/formProduct" component={() => <FormProduct user={user} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage} />} />
           <Route component={Error} />
         </Switch>

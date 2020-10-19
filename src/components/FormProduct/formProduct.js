@@ -21,14 +21,15 @@ const FormProduct = ({ user, errorSuccessMessage, setErrorSuccessMessage }) => {
         // console.log('formData', formData);
         const config = {
             headers: {
-                'content-type': 'multipart/form-data'
+                'content-type': 'multipart/form-data',
+                'Authorization' : `Bearer ${user.data.token}`
             }
         };
         axios.post("http://localhost:3001/api/products", formData, config)
             .then((response) => {
                 alert("The file is successfully uploaded");
             }).catch((error) => {
-                console.log('error', error.response.data)
+                console.log('ERROR', error.response.data)
                 setErrorSuccessMessage(error.response.data.msg);
                 setTimeout( () => {
                     setErrorSuccessMessage('');

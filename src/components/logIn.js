@@ -23,6 +23,15 @@ const LogIn = ({ user, setUser, errorSuccessMessage, setErrorSuccessMessage, his
 
         try {
 
+            if (username === '' || password === '') {
+                setErrorSuccessMessage('Username or Password is empty');
+                setTimeout(() => {
+                    setErrorSuccessMessage('');
+                }, 3000);
+                return
+            }
+            console.log('AFTER test')
+
             setUsername('');
             setPassword('');
 

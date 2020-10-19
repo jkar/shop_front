@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import Header from '../Header/Header';
 
-const SignUp = ({ user }) => {
+const SignUp = ({ user, errorSuccessMessage, setErrorSuccessMessage }) => {
 
     const [name, SetName] = useState('');
     const [username, setUsername] = useState('');
@@ -13,6 +13,14 @@ const SignUp = ({ user }) => {
         e.preventDefault();
 
         try {
+
+            if (name === '' || username === '' || password === '') {
+                setErrorSuccessMessage('Name , username or password are empty');
+                setTimeout(() => {
+                    setErrorSuccessMessage('');
+                }, 3000);
+                return
+            }
 
             // const params = {
             //     name : name,
@@ -29,6 +37,10 @@ const SignUp = ({ user }) => {
         } catch (err) {
             if (err.response) {
                 console.log(err.response.data);
+                setErrorSuccessMessage(err.response.data.msg);
+                setTimeout(() => {
+                    setErrorSuccessMessage('');
+                }, 3000);
             }
 
         }
@@ -60,6 +72,7 @@ const SignUp = ({ user }) => {
                 <input type="password" value={password} onChange={changePassword} />
                 <input type="submit" name="Submit" />
             </form>
+            { errorSuccessMessage !== '' ? <p>{errorSuccessMessage}</p> : null }
         </>
     )
 };
