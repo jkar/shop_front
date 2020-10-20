@@ -11,6 +11,7 @@ const Product = ({ products, currentPage, user }) => {
     return (
         <>
             <Header user={user} />
+            <h3>Details</h3>
             <div>
                 <p>{product.title}</p>
                 <p>{product.description}</p>

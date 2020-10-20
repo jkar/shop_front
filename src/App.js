@@ -11,6 +11,7 @@ import LogIn from './components/LogIn/logIn';
 import SignUp from './components/SignUp/signUp';
 import Product from './components/Product/product';
 import EditDeleteProduct from './components/EditDeleteProduct/editDeleteProduct';
+import EditProduct from './components/EditProduct/editProduct';
 
 
 
@@ -96,6 +97,7 @@ function App() {
 
   return (
     <div className="App">
+        { errorSuccessMessage !== '' ? <p>{errorSuccessMessage}</p> : null }
         { user === null ? null : <p>{user.data.name} is logged in</p>}
         { user === null ? null : <button onClick={logOut}>Log Out</button> }
         <Switch>
@@ -106,6 +108,7 @@ function App() {
           <Route path="/formProduct" component={() => <FormProduct user={user} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage} />} />
           <Route path="/editeDeleteProduct" component={() => <EditDeleteProduct products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages} user={user} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage} />}></Route>
           <Route path="/products/:id"><Product products={products} currentPage={currentPage} user={user} /></Route>
+          <Route path="/product/:id"><EditProduct products={products} currentPage={currentPage} user={user} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage} /></Route>
           <Route component={Error} />
         </Switch>
     </div>

@@ -59,6 +59,7 @@ const pageProductsForEditDeletion = ({ products, setProducts, currentPage, limit
                         <p>{product.number}</p>
                         {product.imagePath ? <img src={`http://localhost:3001/${product.imagePath}`} width='100px' height='100px' /> : null }
                         <Link to={`/products/${product._id}`}>Details</Link>
+                        <Link to={`/product/${product._id}`}>Edit</Link>
                         <button onClick={() => deleteProduct(product._id)}>Delete</button>
                      </div>
                     )   

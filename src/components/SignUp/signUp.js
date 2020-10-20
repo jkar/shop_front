@@ -34,7 +34,7 @@ const SignUp = ({ user, errorSuccessMessage, setErrorSuccessMessage, history }) 
 
             const res = await axios.post('http://localhost:3001/api/user', { name : name, username : username, password : password });
             setErrorSuccessMessage('User is signed up successfuly');
-            // history.push('/');
+            history.push('/');
             setTimeout(() => {
                 setErrorSuccessMessage('');
             }, 3000);
