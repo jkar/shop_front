@@ -1,6 +1,6 @@
 import React from 'react';
-import PageProducts2 from './pageProducts2';
-import ShowButtons from './showButtons';
+import PageProducts2 from '../PageProducts2/pageProducts2';
+import ShowButtons from '../ShowButtons/showButtons';
 
 const Products = ({ limit, products, setProducts, currentPage, setCurrentPage, totalPages, requestPageProduct, requestedPages }) => {
 

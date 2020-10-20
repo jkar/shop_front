@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import './App.css';
-import Products from './components/products';
+// import Products from './components/Products/products';
 import FormProduct from './components/FormProduct/formProduct';
 import Header from './components/Header/Header';
-import About from './components/About';
+import About from './components/About/About';
 import Main from './components/Main/Main';
 import axios from 'axios';
-import LogIn from './components/logIn';
+import LogIn from './components/LogIn/logIn';
 import SignUp from './components/SignUp/signUp';
 import Product from './components/Product/product';
 import EditDeleteProduct from './components/EditDeleteProduct/editDeleteProduct';

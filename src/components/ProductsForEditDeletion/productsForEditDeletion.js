@@ -1,6 +1,6 @@
 import React from 'react';
 import PageProductsForEditDeletion from '../PageProductsForEditDeletion/pageProductsForEditDeletion';
-import ShowButtons from '../showButtons';
+import ShowButtons from '../ShowButtons/showButtons';
 
 const ProductsForEditDeletion = ({ user, limit, products, setProducts, currentPage, setCurrentPage, totalPages, requestPageProduct, requestedPages, errorSuccessMessage, setErrorSuccessMessage }) => {
 
