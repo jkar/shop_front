@@ -11,13 +11,13 @@ const pageProductsForEditDeletion = ({ products, setProducts, currentPage, limit
         return `Bearer ${newToken}`
       }
 
-    const deleteProduct = async (id) => {
-
+    const deleteProduct = async (id, imgPath) => {
         try {
             const config = {
                 headers: { Authorization: setToken(user.data.token) },
               }
               const res = await axios.delete(`http://localhost:3001/api/products/${id}`, config);
+              const res2 = await axios.post(`http://localhost:3001/api/products/img`, { img : imgPath } , config)
               let p = [...prods];
               p = p.filter(pr => {
                   console.log('prid', pr._id)
@@ -60,7 +60,7 @@ const pageProductsForEditDeletion = ({ products, setProducts, currentPage, limit
                         {product.imagePath ? <img src={`http://localhost:3001/${product.imagePath}`} width='100px' height='100px' /> : null }
                         <Link to={`/products/${product._id}`}>Details</Link>
                         <Link to={`/product/${product._id}`}>Edit</Link>
-                        <button onClick={() => deleteProduct(product._id)}>Delete</button>
+                        <button onClick={() => deleteProduct(product._id, product.imagePath)}>Delete</button>
                      </div>
                     )   
                 })}
