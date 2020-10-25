@@ -13,10 +13,49 @@ const EditProduct = ({ products, currentPage, user, errorSuccessMessage, setErro
     const [title, setTitle] = useState(product.title);
     const [description, setDescription] = useState(product.description);
 
+    const deleteOldImage = async () => {
+
+        try {
+            const config = {
+                headers: { Authorization: `Bearer ${user.data.token}` },
+              }
+              const res2 = await axios.post(`http://localhost:3001/api/products/img`, { img : product.imagePath } , config)
+
+        } catch (error) {
+            console.log('ERROR', error.response.data)
+            setErrorSuccessMessage(error.response.data.msg);
+            setTimeout( () => {
+                setErrorSuccessMessage('');
+            }, 3000);
+        }
+    }
+
+    const putCardWithoutImage = async () => {
+        try {
+            const config = {
+                headers: { Authorization: `Bearer ${user.data.token}` },
+              }
+
+            const res = await  axios.put(`http://localhost:3001/api/products/withoutImage/${product._id}`, { title : title, description : description, imagePath : product.imagePath } , config)
+            setErrorSuccessMessage('file was uploaded successfuly');
+            setTimeout(() => {
+                setErrorSuccessMessage('');
+            }, 3000);
+
+        } catch (error) {
+            console.log('ERROR', error.response.data)
+            setErrorSuccessMessage(error.response.data.msg);
+            setTimeout( () => {
+                setErrorSuccessMessage('');
+            }, 3000);
+        }
+    }
+
     const onFormSubmit = (e) => {
         e.preventDefault();
 
-        if (file === null || title === '' || description === '') {
+        // if (file === null || title === '' || description === '') {
+            if (title === '' || description === '') {
             setErrorSuccessMessage('file or title or description is empty');
             setTimeout( () => {
                 setErrorSuccessMessage('');
@@ -37,19 +76,25 @@ const EditProduct = ({ products, currentPage, user, errorSuccessMessage, setErro
                 'Authorization' : `Bearer ${user.data.token}`
             }
         };
-        axios.put(`http://localhost:3001/api/products/${product._id}`, formData, config)
-            .then((response) => {
-                setErrorSuccessMessage('file was uploaded successfuly');
-                setTimeout(() => {
-                    setErrorSuccessMessage('');
-                }, 3000);
-            }).catch((error) => {
-                console.log('ERROR', error.response.data)
-                setErrorSuccessMessage(error.response.data.msg);
-                setTimeout( () => {
-                    setErrorSuccessMessage('');
-                }, 3000);
-        });
+        if (file !== null ) {
+            axios.put(`http://localhost:3001/api/products/${product._id}`, formData, config)
+                .then((response) => {
+                    deleteOldImage();
+                    setErrorSuccessMessage('file was uploaded successfuly');
+                    setTimeout(() => {
+                        setErrorSuccessMessage('');
+                    }, 3000);
+                }).catch((error) => {
+                    console.log('ERROR', error.response.data)
+                    setErrorSuccessMessage(error.response.data.msg);
+                    setTimeout( () => {
+                        setErrorSuccessMessage('');
+                    }, 3000);
+            });
+        } else {
+            console.log('ELSE', file)
+            putCardWithoutImage();
+        }
     }
 
     const onChange = (e) => {
