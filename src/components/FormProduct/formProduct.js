@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Header from '../Header/Header';
 
-const FormProduct = ({ user, errorSuccessMessage, setErrorSuccessMessage }) => {
+const FormProduct = ({ user, errorSuccessMessage, setErrorSuccessMessage, products, setProducts, totalPages, setTotalPages, limit }) => {
 
     const [file, setFile] = useState(null);
     const [title, setTitle] = useState('');
@@ -36,6 +36,23 @@ const FormProduct = ({ user, errorSuccessMessage, setErrorSuccessMessage }) => {
         };
         axios.post("http://localhost:3001/api/products", formData, config)
             .then((response) => {
+
+                console.log('RESP', response.data);
+                let prods = [...products];
+                let prod = response.data;
+                if (prods[totalPages-1].length > 0 ) {
+                    console.log('11111');
+                    prods[totalPages-1] = [...prods[totalPages-1], prod];
+                } else {
+                    console.log('222222');
+                    prods = [...prods, [prod]];
+                    setTotalPages(totalPages+1);
+                }
+                console.log('PROD', prods)
+                setProducts(prods);
+
+
+
                 setErrorSuccessMessage('file was uploaded successfuly');
                 setTimeout(() => {
                     setErrorSuccessMessage('');
@@ -64,6 +81,7 @@ const FormProduct = ({ user, errorSuccessMessage, setErrorSuccessMessage }) => {
     return (
         <>
             <Header user={user} />
+            <h3>Create Product</h3>
             <form onSubmit={onFormSubmit}>
                 <label>File Upload</label>
                 <input type="file" name="file" onChange= {onChange} />
