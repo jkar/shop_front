@@ -25,6 +25,7 @@ const FormProduct = ({ user, errorSuccessMessage, setErrorSuccessMessage, produc
         formData.append('file', file);
         formData.append('title', title);
         formData.append('description', description);
+        formData.append('date', Date.now());
         // console.log('FILE',formData.get("file"));
         // console.log('TITLE',formData.get("title"));
         // console.log('DESCRIPTION', formData.get("description"));

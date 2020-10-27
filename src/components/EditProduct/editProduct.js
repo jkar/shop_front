@@ -36,7 +36,7 @@ const EditProduct = ({ products, currentPage, user, errorSuccessMessage, setErro
                 headers: { Authorization: `Bearer ${user.data.token}` },
               }
 
-            const res = await  axios.put(`http://localhost:3001/api/products/withoutImage/${product._id}`, { title : title, description : description, imagePath : product.imagePath } , config)
+            const res = await  axios.put(`http://localhost:3001/api/products/withoutImage/${product._id}`, { title : title, description : description, imagePath : product.imagePath, date : Date.parse(product.date) } , config)
             setErrorSuccessMessage('file was uploaded successfuly');
             setTimeout(() => {
                 setErrorSuccessMessage('');
@@ -63,10 +63,12 @@ const EditProduct = ({ products, currentPage, user, errorSuccessMessage, setErro
             return
         }
 
+        console.log('DATE', product.date)
         const formData = new FormData();
         formData.append('file', file);
         formData.append('title', title);
         formData.append('description', description);
+        formData.append('date', Date.parse(product.date));
         // console.log('FILE',formData.get("file"));
         // console.log('TITLE',formData.get("title"));
         // console.log('DESCRIPTION', formData.get("description"));
