@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams } from "react-router-dom";
 import Header from '../Header/Header';
 
-const EditProduct = ({ products, currentPage, user, errorSuccessMessage, setErrorSuccessMessage }) => {
+const EditProduct = ({ products, currentPage, user, errorSuccessMessage, setErrorSuccessMessage, setProducts }) => {
 
     const id = useParams().id;
     const prods = products[currentPage-1];
@@ -37,6 +37,10 @@ const EditProduct = ({ products, currentPage, user, errorSuccessMessage, setErro
               }
 
             const res = await  axios.put(`http://localhost:3001/api/products/withoutImage/${product._id}`, { title : title, description : description, imagePath : product.imagePath, date : Date.parse(product.date) } , config)
+            let prods = [...products];
+            prods[currentPage-1] = prods[currentPage-1].map(el => el._id !== product._id ? el : res.data);
+            console.log('PRODSS', prods);
+            setProducts(prods);
             setErrorSuccessMessage('file was uploaded successfuly');
             setTimeout(() => {
                 setErrorSuccessMessage('');
@@ -78,6 +82,10 @@ const EditProduct = ({ products, currentPage, user, errorSuccessMessage, setErro
         if (file !== null ) {
             axios.put(`http://localhost:3001/api/products/${product._id}`, formData, config)
                 .then((response) => {
+                    let prods = [...products];
+                    prods[currentPage-1] = prods[currentPage-1].map(el => el._id !== product._id ? el : response.data);
+                    console.log('PRODS2', prods);
+                    setProducts(prods);
                     deleteOldImage();
                     setErrorSuccessMessage('file was uploaded successfuly');
                     setTimeout(() => {

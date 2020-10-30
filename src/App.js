@@ -112,7 +112,7 @@ function App() {
           <Route path="/formProduct" component={() => <FormProduct user={user} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage} products={products} setProducts={setProducts} totalPages={totalPages} setTotalPages={setTotalPages} limit={limit} />} />
           <Route path="/editeDeleteProduct" component={() => <EditDeleteProduct products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages} user={user} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage} setDeletedProducts={setDeletedProducts} deletedProducts={deletedProducts} />}></Route>
           <Route path="/products/:id"><Product products={products} currentPage={currentPage} user={user} /></Route>
-          <Route path="/product/:id"><EditProduct products={products} currentPage={currentPage} user={user} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage} /></Route>
+          <Route path="/product/:id"><EditProduct products={products} currentPage={currentPage} user={user} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage} setProducts={setProducts} /></Route>
           <Route component={Error} />
         </Switch>
     </div>
