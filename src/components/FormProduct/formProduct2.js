@@ -42,23 +42,15 @@ const FormProduct = ({ user, errorSuccessMessage, setErrorSuccessMessage, produc
                 let prods = [...products];
                 let prod = response.data;
                 if (prods[0].length !== 0) {
-                    if (prods[totalPages-1].length > 0 ) {
                         console.log('11111');
-                        prods[totalPages-1] = [...prods[totalPages-1], prod];
-                    } else {
-                        console.log('222222');
-                        prods = [...prods, [prod]];
-                        setTotalPages(totalPages+1);
-                    }
+                        prods[0].unshift(prod);
                 } else {
                     console.log('333')
-                    prods[0] = [response.data]
+                    prods[0] = [prod]
                     setTotalPages(1);
                 }
                 console.log('PROD', prods)
                 setProducts(prods);
-
-
 
                 setErrorSuccessMessage('file was uploaded successfuly');
                 setTimeout(() => {

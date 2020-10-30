@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import './App.css';
 // import Products from './components/Products/products';
-import FormProduct from './components/FormProduct/formProduct';
+// import FormProduct from './components/FormProduct/formProduct';
+import FormProduct from './components/FormProduct/formProduct2';
+
 import Header from './components/Header/Header';
 import About from './components/About/About';
 import Main from './components/Main/Main';
@@ -24,6 +26,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [requestedPages, setRequestedPages] = useState([]);
   const [errorSuccessMessage, setErrorSuccessMessage ] = useState('');
+  const [deletedProducts, setDeletedProducts] =  useState(0);
 
   const history = useHistory();
 
@@ -31,6 +34,7 @@ function App() {
   console.log('products', products);
   // console.log('requestedPages', requestedPages);
   console.log('user', user);
+  console.log('OFFSET', deletedProducts)
 
   const requestPageProduct = (lmt, ofst, pg, frst) => {
     console.log('OOOOFFFFFFSSSSSSSS', ofst)
@@ -101,12 +105,12 @@ function App() {
         { user === null ? null : <p>{user.data.name} is logged in</p>}
         { user === null ? null : <button onClick={logOut}>Log Out</button> }
         <Switch>
-          <Route path="/" component={() => <Main products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages} user={user} /> } exact />
+          <Route path="/" component={() => <Main products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages} user={user} setDeletedProducts={setDeletedProducts} deletedProducts={deletedProducts} /> } exact />
           <Route path="/about" component={() => <About user={user} /> } />
           <Route path="/login" component={() => <LogIn user={user} setUser={setUser} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage}  history={history} /> } />
           <Route path="/signup" component={() => <SignUp user={user} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage} history={history} /> } />
           <Route path="/formProduct" component={() => <FormProduct user={user} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage} products={products} setProducts={setProducts} totalPages={totalPages} setTotalPages={setTotalPages} limit={limit} />} />
-          <Route path="/editeDeleteProduct" component={() => <EditDeleteProduct products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages} user={user} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage} />}></Route>
+          <Route path="/editeDeleteProduct" component={() => <EditDeleteProduct products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages} user={user} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage} setDeletedProducts={setDeletedProducts} deletedProducts={deletedProducts} />}></Route>
           <Route path="/products/:id"><Product products={products} currentPage={currentPage} user={user} /></Route>
           <Route path="/product/:id"><EditProduct products={products} currentPage={currentPage} user={user} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage} /></Route>
           <Route component={Error} />

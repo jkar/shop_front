@@ -69,9 +69,6 @@ const EditProduct = ({ products, currentPage, user, errorSuccessMessage, setErro
         formData.append('title', title);
         formData.append('description', description);
         formData.append('date', Date.parse(product.date));
-        // console.log('FILE',formData.get("file"));
-        // console.log('TITLE',formData.get("title"));
-        // console.log('DESCRIPTION', formData.get("description"));
         const config = {
             headers: {
                 'content-type': 'multipart/form-data',

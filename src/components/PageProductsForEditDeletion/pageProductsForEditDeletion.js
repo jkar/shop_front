@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 
-const pageProductsForEditDeletion = ({ products, setProducts, currentPage, limit, user, errorSuccessMessage, setErrorSuccessMessage }) => {
+const pageProductsForEditDeletion = ({ products, setProducts, currentPage, limit, user, errorSuccessMessage, setErrorSuccessMessage, setDeletedProducts, deletedProducts }) => {
 
     let prods = products[currentPage-1];
     console.log('CurrentProd', prods)
@@ -28,6 +28,7 @@ const pageProductsForEditDeletion = ({ products, setProducts, currentPage, limit
 
                 let pr = [...products];
                 pr[currentPage-1] = p;
+                setDeletedProducts(deletedProducts+1);
                 setErrorSuccessMessage('product is successfully deleted');
                 setTimeout(() => {
                     setErrorSuccessMessage('')
