@@ -5,4 +5,5 @@
 nav {
 	margin: 0 auto;
 	display: flex;
+	grid-area: header;
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import PageProducts2 from '../PageProducts2/pageProducts2';
 import ShowButtons from '../ShowButtons/showButtons';
+import './products.css';
 
 const Products = ({ limit, products, setProducts, currentPage, setCurrentPage, totalPages, requestPageProduct, requestedPages, deletedProducts }) => {
 
@@ -20,7 +21,7 @@ const Products = ({ limit, products, setProducts, currentPage, setCurrentPage, t
     console.log('currentPage', currentPage);
 
     return (
-        <div>
+        <div className="main">
             <p>products</p>
             <PageProducts2 products={products} currentPage={currentPage} limit={limit} />
             <ShowButtons totalPages={totalPages} products={products} changePage={changePage} />
