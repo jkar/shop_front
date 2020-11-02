@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import './pageProducts2.css';
 
 const PageProducts = ({ products, currentPage, limit }) => {
 
@@ -12,11 +13,11 @@ const PageProducts = ({ products, currentPage, limit }) => {
         )
     } else {
         return (
-            <div>
+            <div className="pageProducts">
                 {prods.map( (product, index) => {
                     
                     return (
-                    <div key={index}>
+                    <div className="productCard" key={index}>
                         <p>{product.title}</p>
                         <p>{product.description}</p>
                         <p>{product.number}</p>

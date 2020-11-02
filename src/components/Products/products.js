@@ -22,7 +22,7 @@ const Products = ({ limit, products, setProducts, currentPage, setCurrentPage, t
 
     return (
         <div className="main">
-            <p>products</p>
+            <h3>products</h3>
             <PageProducts2 products={products} currentPage={currentPage} limit={limit} />
             <ShowButtons totalPages={totalPages} products={products} changePage={changePage} />
         </div>

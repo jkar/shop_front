@@ -1,7 +1,8 @@
 .mainPage {
     display: grid;
+    height: 100%;
     grid-template-columns: 100%;
-    grid-template-rows: 80px auto 80px;
+    grid-template-rows: 80px minmax(535px, auto) 80px;
     grid-template-areas: "header"
                           "main"
                          "footer"
