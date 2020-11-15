@@ -27,6 +27,7 @@ function App() {
   const [requestedPages, setRequestedPages] = useState([]);
   const [errorSuccessMessage, setErrorSuccessMessage ] = useState('');
   const [deletedProducts, setDeletedProducts] =  useState(0);
+  const [dropDownOptions, setDropDownOptions] = useState([]);
 
   const history = useHistory();
 
@@ -34,7 +35,8 @@ function App() {
   console.log('products', products);
   // console.log('requestedPages', requestedPages);
   console.log('user', user);
-  console.log('OFFSET', deletedProducts)
+  console.log('OFFSET', deletedProducts);
+  console.log('dropDownOptions', dropDownOptions);
 
   const requestPageProduct = (lmt, ofst, pg, frst) => {
     console.log('OOOOFFFFFFSSSSSSSS', ofst)
@@ -64,11 +66,18 @@ function App() {
         setProducts(prod);
         setRequestedPages(rp);
 
-        
-
       }
     });
   };
+
+  const getDropDownOptions = async () => {
+    try {
+      const res = await axios.get('http://localhost:3001/api/filters');
+      setDropDownOptions(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const requestTotalPages = (l) => {
     const params = {
@@ -78,6 +87,12 @@ function App() {
     request.then( res => {
       requestPageProduct(limit, 0, 0, parseInt(res.data.numberOfPages));
       setTotalPages(parseInt(res.data.numberOfPages));
+    })
+    .then( res => {
+      getDropDownOptions();
+    })
+    .catch((error) => {
+      console.log(error);
     })
   };
 
