@@ -120,7 +120,7 @@ function App() {
         { user === null ? null : <p>{user.data.name} is logged in</p>}
         { user === null ? null : <button onClick={logOut}>Log Out</button> }
         <Switch>
-          <Route path="/" component={() => <Main products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages} user={user} setDeletedProducts={setDeletedProducts} deletedProducts={deletedProducts} /> } exact />
+          <Route path="/" component={() => <Main products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages} user={user} setDeletedProducts={setDeletedProducts} deletedProducts={deletedProducts} dropDownOptions={dropDownOptions} /> } exact />
           <Route path="/about" component={() => <About user={user} /> } />
           <Route path="/login" component={() => <LogIn user={user} setUser={setUser} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage}  history={history} /> } />
           <Route path="/signup" component={() => <SignUp user={user} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage} history={history} /> } />
