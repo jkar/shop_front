@@ -28,6 +28,11 @@ function App() {
   const [errorSuccessMessage, setErrorSuccessMessage ] = useState('');
   const [deletedProducts, setDeletedProducts] =  useState(0);
   const [dropDownOptions, setDropDownOptions] = useState([]);
+  const [filter, setFilter] = useState(false);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [requestedFilterdPages, setRequestedFilteredPages] = useState([]);
+  const [filterCurrentPage, setFilterCurrentPage] = useState(1);
+  const [filterTotalPages, setFilterTotalPages] = useState(1);
 
   const history = useHistory();
 
@@ -67,6 +72,36 @@ function App() {
         setRequestedPages(rp);
 
       }
+    });
+  };
+
+  const requestFilteredPageProduct = (lmt, ofst, pg) => {
+    const params = {
+      limit : parseInt(lmt),
+      offset : parseInt(ofst)
+    }
+    const request = axios.get('http://localhost:3001/api/products', { params : params } );
+    request.then( res => {
+
+      // if (requestedFilterdPages.length === 0 ) {
+      //   let rp = [true];
+      //   let prod = [res.data];
+      //   for (var x = 1; x < frst; x++) {
+      //     rp.push(false);
+      //     prod.push([]);
+      //   }
+      //   setFilteredProducts(prod);
+      //   setRequestedFilteredPages(rp);
+      // } else {
+        let rp = [...requestedFilterdPages];
+        rp.push(true);
+        let prod = [...filteredProducts];
+        prod.push(res.data);
+
+        setFilteredProducts(prod);
+        setRequestedFilteredPages(rp);
+
+      // }
     });
   };
 
@@ -120,7 +155,7 @@ function App() {
         { user === null ? null : <p>{user.data.name} is logged in</p>}
         { user === null ? null : <button onClick={logOut}>Log Out</button> }
         <Switch>
-          <Route path="/" component={() => <Main products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages} user={user} setDeletedProducts={setDeletedProducts} deletedProducts={deletedProducts} dropDownOptions={dropDownOptions} /> } exact />
+          <Route path="/" component={() => <Main products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages} user={user} setDeletedProducts={setDeletedProducts} deletedProducts={deletedProducts} dropDownOptions={dropDownOptions} requestFilteredPageProduct={requestFilteredPageProduct} filter={filter} setFilter={setFilter} filteredProducts={filteredProducts} setFilteredProducts={setFilteredProducts} requestedFilterdPages={requestedFilterdPages} setRequestedFilteredPages={setRequestedFilteredPages} filterCurrentPage={filterCurrentPage} setFilterCurrentPage={setFilterCurrentPage} filterTotalPages={filterTotalPages} setFilterTotalPages={setFilterTotalPages} /> } exact />
           <Route path="/about" component={() => <About user={user} /> } />
           <Route path="/login" component={() => <LogIn user={user} setUser={setUser} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage}  history={history} /> } />
           <Route path="/signup" component={() => <SignUp user={user} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage} history={history} /> } />
