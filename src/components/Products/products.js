@@ -4,10 +4,8 @@ import ShowButtons from '../ShowButtons/showButtons';
 import FilterTitle from '../filterTitle/FilterTitle';
 import './products.css';
 
-const Products = ({ limit, products, setProducts, currentPage, setCurrentPage, totalPages, requestPageProduct, requestedPages, deletedProducts, dropDownOptions }) => {
+const Products = ({ limit, products, setProducts, currentPage, setCurrentPage, totalPages, requestPageProduct, requestedPages, deletedProducts, dropDownOptions, setFilter, filter, titleOption, setTitleOption }) => {
 
-    const [titleOption, setTitleOption] = useState('');
-    console.log('titleOption', titleOption);
 
     const changePage = (num) => {
         setCurrentPage(num);
@@ -27,7 +25,7 @@ const Products = ({ limit, products, setProducts, currentPage, setCurrentPage, t
     return (
         <div className="main">
             <h3>products</h3>
-            <FilterTitle dropDownOptions={dropDownOptions} setTitleOption={setTitleOption} />
+            <FilterTitle dropDownOptions={dropDownOptions} setTitleOption={setTitleOption} titleOption={titleOption} setFilter={setFilter} filter={filter} />
             <PageProducts2 products={products} currentPage={currentPage} limit={limit} />
             <ShowButtons totalPages={totalPages} products={products} changePage={changePage} />
         </div>

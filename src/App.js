@@ -33,6 +33,7 @@ function App() {
   const [requestedFilterdPages, setRequestedFilteredPages] = useState([]);
   const [filterCurrentPage, setFilterCurrentPage] = useState(1);
   const [filterTotalPages, setFilterTotalPages] = useState(1);
+  const [titleOption, setTitleOption] = useState([]);
 
   const history = useHistory();
 
@@ -42,6 +43,7 @@ function App() {
   console.log('user', user);
   console.log('OFFSET', deletedProducts);
   console.log('dropDownOptions', dropDownOptions);
+  console.log('filter', filter);
 
   const requestPageProduct = (lmt, ofst, pg, frst) => {
     console.log('OOOOFFFFFFSSSSSSSS', ofst)
@@ -135,6 +137,7 @@ function App() {
     requestTotalPages(limit);
   }, []);
 
+
   useEffect(() => {
     
     const loggedUserJSON = window.localStorage.getItem('loggedUser');
@@ -155,7 +158,7 @@ function App() {
         { user === null ? null : <p>{user.data.name} is logged in</p>}
         { user === null ? null : <button onClick={logOut}>Log Out</button> }
         <Switch>
-          <Route path="/" component={() => <Main products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages} user={user} setDeletedProducts={setDeletedProducts} deletedProducts={deletedProducts} dropDownOptions={dropDownOptions} requestFilteredPageProduct={requestFilteredPageProduct} filter={filter} setFilter={setFilter} filteredProducts={filteredProducts} setFilteredProducts={setFilteredProducts} requestedFilterdPages={requestedFilterdPages} setRequestedFilteredPages={setRequestedFilteredPages} filterCurrentPage={filterCurrentPage} setFilterCurrentPage={setFilterCurrentPage} filterTotalPages={filterTotalPages} setFilterTotalPages={setFilterTotalPages} /> } exact />
+          <Route path="/" component={() => <Main products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} totalPages={totalPages} requestPageProduct={requestPageProduct} requestedPages={requestedPages} user={user} setDeletedProducts={setDeletedProducts} deletedProducts={deletedProducts} dropDownOptions={dropDownOptions} requestFilteredPageProduct={requestFilteredPageProduct} filter={filter} setFilter={setFilter} filteredProducts={filteredProducts} setFilteredProducts={setFilteredProducts} requestedFilterdPages={requestedFilterdPages} setRequestedFilteredPages={setRequestedFilteredPages} filterCurrentPage={filterCurrentPage} setFilterCurrentPage={setFilterCurrentPage} filterTotalPages={filterTotalPages} setFilterTotalPages={setFilterTotalPages} titleOption={titleOption} setTitleOption={setTitleOption} /> } exact />
           <Route path="/about" component={() => <About user={user} /> } />
           <Route path="/login" component={() => <LogIn user={user} setUser={setUser} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage}  history={history} /> } />
           <Route path="/signup" component={() => <SignUp user={user} errorSuccessMessage={errorSuccessMessage} setErrorSuccessMessage={setErrorSuccessMessage} history={history} /> } />

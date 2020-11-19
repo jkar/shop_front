@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PageProducts2 from '../PageProducts2/pageProducts2';
 import FilterPageProducts from '../FilterPageProducts/FilterPageProducts';
 import ShowButtons from '../ShowButtons/showButtons';
 import FilterTitle from '../filterTitle/FilterTitle';
 import './FilterProducts.css';
 
-const FilterProducts = ({ user, deletedProducts, dropDownOptions, limit, requestFilteredPageProduct, filter, setFilter, filteredProducts, setFilteredProducts, requestedFilterdPages, setRequestedFilteredPages, filterCurrentPage, setFilterCurrentPage, filterTotalPages, setFilterTotalPages }) => {
-
-    const [titleOption, setTitleOption] = useState('');
+const FilterProducts = ({ user, deletedProducts, dropDownOptions, limit, requestFilteredPageProduct, filter, setFilter, filteredProducts, setFilteredProducts, requestedFilterdPages, setRequestedFilteredPages, filterCurrentPage, setFilterCurrentPage, filterTotalPages, setFilterTotalPages, titleOption, setTitleOption }) => {
 
     const changePage = (num) => {
         setFilterCurrentPage(num);
@@ -26,12 +24,13 @@ const FilterProducts = ({ user, deletedProducts, dropDownOptions, limit, request
     }
 
     console.log('filterCurrentPage', filterCurrentPage);
+    console.log('titleOption', titleOption);
     
 
     return (
         <div className="main">
             <h3>Filtered products</h3>
-            <FilterTitle dropDownOptions={dropDownOptions} setTitleOption={setTitleOption} />
+            <FilterTitle dropDownOptions={dropDownOptions} titleOption={titleOption} setTitleOption={setTitleOption} filter={filter} setFilter={setFilter} />
             <FilterPageProducts filteredProducts={filteredProducts} filterCurrentPage={filterCurrentPage} limit={limit} />
             <ShowButtons filterTotalPages={filterTotalPages} filteredProducts={filteredProducts} changePage={changePage} />
         </div>

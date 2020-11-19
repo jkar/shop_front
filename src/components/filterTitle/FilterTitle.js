@@ -1,16 +1,35 @@
 import React from 'react';
-import './FilterTitle.css'
+import './FilterTitle.css';
 
-const FilterTitle = ({ dropDownOptions, setTitleOption }) => {
+const FilterTitle = ({ dropDownOptions, setTitleOption, setFilter, filter, titleOption }) => {
 
 
     const titleOptionButton = (el) => {
 
-        setTitleOption(el);
+        let titleOptionCopy = [...titleOption];
+        titleOptionCopy.push(el);
+        setTitleOption(titleOptionCopy);
+        if (!filter) {
+            setFilter(true);
+        }
     };
+
+    const removeOptionTitle = (el) => {
+        const index = titleOption.indexOf(el);
+        const titleOptionCopy = [...titleOption];
+        if (index > -1) {
+            titleOptionCopy.splice(index, 1);
+            setTitleOption(titleOptionCopy);
+        }
+    }
+
+    const removeFilterButton = () => {
+        setFilter(false);
+    }
 
     if (dropDownOptions.length !== 0 ) {
         return (
+            <>
             <div className="dropdown">
                 <button className="dropbtn">Dropdown</button>
                 <div className="dropdown-content">
@@ -24,6 +43,18 @@ const FilterTitle = ({ dropDownOptions, setTitleOption }) => {
                     }
                 </div>
             </div>
+            <div>
+            {
+                titleOption.length > 0 
+                ?
+                titleOption.map((el,index) => {
+                    return <p key={index} onClick={() => removeOptionTitle(el)} style={{backgroundColor : "grey"}}>{el}</p>
+                })
+                :
+                null
+            }
+            </div>
+            </>
         );
     } else {
         return null;
