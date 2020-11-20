@@ -39,6 +39,7 @@ function App() {
 
   // console.log('totalPages', totalPages);
   console.log('products', products);
+  console.log('filteredProducts', filteredProducts);
   // console.log('requestedPages', requestedPages);
   console.log('user', user);
   console.log('OFFSET', deletedProducts);
@@ -77,12 +78,13 @@ function App() {
     });
   };
 
-  const requestFilteredPageProduct = (lmt, ofst, pg) => {
+  const requestFilteredPageProduct = (lmt, ofst, pg, titles, setNewFilter) => {
     const params = {
       limit : parseInt(lmt),
-      offset : parseInt(ofst)
+      offset : parseInt(ofst),
+      titles : titles
     }
-    const request = axios.get('http://localhost:3001/api/products', { params : params } );
+    const request = axios.get('http://localhost:3001/api/filters/title', { params : params } );
     request.then( res => {
 
       // if (requestedFilterdPages.length === 0 ) {
@@ -97,7 +99,7 @@ function App() {
       // } else {
         let rp = [...requestedFilterdPages];
         rp.push(true);
-        let prod = [...filteredProducts];
+        let prod = setNewFilter ? [] : [...filteredProducts]; 
         prod.push(res.data);
 
         setFilteredProducts(prod);

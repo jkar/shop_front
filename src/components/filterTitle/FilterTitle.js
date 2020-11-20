@@ -1,7 +1,7 @@
 import React from 'react';
 import './FilterTitle.css';
 
-const FilterTitle = ({ dropDownOptions, setTitleOption, setFilter, filter, titleOption }) => {
+const FilterTitle = ({ dropDownOptions, setTitleOption, setFilter, filter, titleOption, putFilteredTitle, setFilteredProducts, filteredProducts }) => {
 
 
     const titleOptionButton = (el) => {
@@ -9,6 +9,7 @@ const FilterTitle = ({ dropDownOptions, setTitleOption, setFilter, filter, title
         let titleOptionCopy = [...titleOption];
         titleOptionCopy.push(el);
         setTitleOption(titleOptionCopy);
+        putFilteredTitle(titleOptionCopy);
         if (!filter) {
             setFilter(true);
         }
@@ -20,6 +21,10 @@ const FilterTitle = ({ dropDownOptions, setTitleOption, setFilter, filter, title
         if (index > -1) {
             titleOptionCopy.splice(index, 1);
             setTitleOption(titleOptionCopy);
+            putFilteredTitle(titleOptionCopy);
+
+            // const newFilteredProducts = filteredProducts.filter( fp => fp.title !== el );
+            // setFilteredProducts(newFilteredProducts);
         }
     }
 

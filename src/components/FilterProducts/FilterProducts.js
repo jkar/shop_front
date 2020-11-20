@@ -23,6 +23,10 @@ const FilterProducts = ({ user, deletedProducts, dropDownOptions, limit, request
         }
     }
 
+    const putFilteredTitle = (titles) => {
+        requestFilteredPageProduct(limit, 0, 1, titles, true);
+    }
+
     console.log('filterCurrentPage', filterCurrentPage);
     console.log('titleOption', titleOption);
     
@@ -30,7 +34,7 @@ const FilterProducts = ({ user, deletedProducts, dropDownOptions, limit, request
     return (
         <div className="main">
             <h3>Filtered products</h3>
-            <FilterTitle dropDownOptions={dropDownOptions} titleOption={titleOption} setTitleOption={setTitleOption} filter={filter} setFilter={setFilter} />
+            <FilterTitle dropDownOptions={dropDownOptions} titleOption={titleOption} setTitleOption={setTitleOption} filter={filter} setFilter={setFilter} putFilteredTitle={putFilteredTitle} setFilteredProducts={setFilteredProducts} filteredProducts={filteredProducts} />
             <FilterPageProducts filteredProducts={filteredProducts} filterCurrentPage={filterCurrentPage} limit={limit} />
             <ShowButtons filterTotalPages={filterTotalPages} filteredProducts={filteredProducts} changePage={changePage} />
         </div>
