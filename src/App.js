@@ -40,7 +40,7 @@ function App() {
   // console.log('totalPages', totalPages);
   console.log('products', products);
   console.log('filteredProducts', filteredProducts);
-  // console.log('requestedPages', requestedPages);
+  console.log('requestedFilterdPages', requestedFilterdPages);
   console.log('user', user);
   console.log('OFFSET', deletedProducts);
   console.log('dropDownOptions', dropDownOptions);
@@ -80,50 +80,59 @@ function App() {
   };
 
   const requestFilteredPageProduct = (lmt, ofst, pg, titles, setNewFilter) => {
-    const params = {
-      limit : parseInt(lmt),
-      offset : parseInt(ofst),
-      titles : titles
-    }
-    const request = axios.get('http://localhost:3001/api/filters/title', { params : params } );
-    request.then( res => {
 
-      // if (requestedFilterdPages.length === 0 ) {
-      //   let rp = [true];
-      //   let prod = [res.data];
-      //   for (var x = 1; x < frst; x++) {
-      //     rp.push(false);
-      //     prod.push([]);
-      //   }
-      //   setFilteredProducts(prod);
-      //   setRequestedFilteredPages(rp);
-      // } else {
-        let rp = [...requestedFilterdPages];
-        rp.push(true);
-        let prod = setNewFilter ? [] : [...filteredProducts]; 
-        prod.push(res.data);
-
-        setFilteredProducts(prod);
-        setRequestedFilteredPages(rp);
-
-      // }
-    })
-    .then( r => {
-      if (setNewFilter) {
-        const params2 = {
+    if (setNewFilter) {
+      const params2 = {
+        limit : parseInt(lmt),
+        titles : titles
+      }
+      const request2 = axios.get('http://localhost:3001/api/filters/countTitles', { params : params2 });
+      request2.then(res2 => {
+        setFilterTotalPages(parseInt(res2.data.numberOfPages));
+        const params = {
           limit : parseInt(lmt),
+          offset : parseInt(ofst),
           titles : titles
         }
-        const request2 = axios.get('http://localhost:3001/api/filters/countTitles', { params : params2 });
-        request2.then(res2 => {
-          setFilterTotalPages(parseInt(res2.data.numberOfPages));
+        const request = axios.get('http://localhost:3001/api/filters/title', { params : params } );
+        request.then( res => {
+    
+            let rp = [true];
+            let prod = [res.data];
+            for (var x = 1; x < res2.data.numberOfPages; x++) {
+              rp.push(false);
+              prod.push([]);
+            }
+            setFilteredProducts(prod);
+            setRequestedFilteredPages(rp);
+
         })
-      } else {
-        console.log('filteredShowButtons has been set');
-      }
-    }).catch((error) => {
+      }).catch((error) => {
         console.log('error', error);
-    })
+      })
+    } else {
+      console.log('filteredShowButtons has been set');
+      const params = {
+        limit : parseInt(lmt),
+        offset : parseInt(ofst),
+        titles : titles
+      }
+      const request = axios.get('http://localhost:3001/api/filters/title', { params : params } );
+      request.then( res => {
+  
+          let rp = [...requestedFilterdPages];
+          rp[pg] = true;
+          let prod = [...filteredProducts];
+          prod[pg] = res.data;
+  
+          setFilteredProducts(prod);
+          setRequestedFilteredPages(rp);
+  
+      }).catch((error) => {
+        console.log('error', error);
+      })
+    }
+
   };
 
   const getDropDownOptions = async () => {

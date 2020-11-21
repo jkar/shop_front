@@ -6,7 +6,7 @@ import FilterTitle from '../filterTitle/FilterTitle';
 import './FilterProducts.css';
 
 const FilterProducts = ({ user, deletedProducts, dropDownOptions, limit, requestFilteredPageProduct, filter, setFilter, filteredProducts, setFilteredProducts, requestedFilterdPages, setRequestedFilteredPages, filterCurrentPage, setFilterCurrentPage, filterTotalPages, setFilterTotalPages, titleOption, setTitleOption }) => {
-
+    
     const changePage = (num) => {
         setFilterCurrentPage(num);
         
@@ -16,7 +16,8 @@ const FilterProducts = ({ user, deletedProducts, dropDownOptions, limit, request
 
         let offset = (num -1) * limit;
         offset = offset -deletedProducts;
-        requestFilteredPageProduct(limit, offset, num-1);
+        // requestFilteredPageProduct(limit, offset, num-1);
+        requestFilteredPageProduct(limit, offset, num-1, titleOption, false);
         
         } else {
             console.log('GOTTENNNNNNNNNNN')
@@ -24,6 +25,7 @@ const FilterProducts = ({ user, deletedProducts, dropDownOptions, limit, request
     };
 
     const putFilteredTitle = (titles) => {
+        setFilterCurrentPage(1);
         requestFilteredPageProduct(limit, 0, 1, titles, true);
     }
 
