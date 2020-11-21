@@ -45,6 +45,7 @@ function App() {
   console.log('OFFSET', deletedProducts);
   console.log('dropDownOptions', dropDownOptions);
   console.log('filter', filter);
+  console.log('filterTotalPages', filterTotalPages);
 
   const requestPageProduct = (lmt, ofst, pg, frst) => {
     console.log('OOOOFFFFFFSSSSSSSS', ofst)
@@ -106,7 +107,23 @@ function App() {
         setRequestedFilteredPages(rp);
 
       // }
-    });
+    })
+    .then( r => {
+      if (setNewFilter) {
+        const params2 = {
+          limit : parseInt(lmt),
+          titles : titles
+        }
+        const request2 = axios.get('http://localhost:3001/api/filters/countTitles', { params : params2 });
+        request2.then(res2 => {
+          setFilterTotalPages(parseInt(res2.data.numberOfPages));
+        })
+      } else {
+        console.log('filteredShowButtons has been set');
+      }
+    }).catch((error) => {
+        console.log('error', error);
+    })
   };
 
   const getDropDownOptions = async () => {

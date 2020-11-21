@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PageProducts2 from '../PageProducts2/pageProducts2';
 import FilterPageProducts from '../FilterPageProducts/FilterPageProducts';
-import ShowButtons from '../ShowButtons/showButtons';
+import FilterShowButtons from '../FilterShowButtons/FilterShowButtons';
 import FilterTitle from '../filterTitle/FilterTitle';
 import './FilterProducts.css';
 
@@ -21,7 +21,7 @@ const FilterProducts = ({ user, deletedProducts, dropDownOptions, limit, request
         } else {
             console.log('GOTTENNNNNNNNNNN')
         }
-    }
+    };
 
     const putFilteredTitle = (titles) => {
         requestFilteredPageProduct(limit, 0, 1, titles, true);
@@ -36,7 +36,7 @@ const FilterProducts = ({ user, deletedProducts, dropDownOptions, limit, request
             <h3>Filtered products</h3>
             <FilterTitle dropDownOptions={dropDownOptions} titleOption={titleOption} setTitleOption={setTitleOption} filter={filter} setFilter={setFilter} putFilteredTitle={putFilteredTitle} setFilteredProducts={setFilteredProducts} filteredProducts={filteredProducts} />
             <FilterPageProducts filteredProducts={filteredProducts} filterCurrentPage={filterCurrentPage} limit={limit} />
-            <ShowButtons filterTotalPages={filterTotalPages} filteredProducts={filteredProducts} changePage={changePage} />
+            <FilterShowButtons filterTotalPages={filterTotalPages} filteredProducts={filteredProducts} changePage={changePage} />
         </div>
     )
 }

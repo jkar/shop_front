@@ -23,8 +23,10 @@ const FilterTitle = ({ dropDownOptions, setTitleOption, setFilter, filter, title
             setTitleOption(titleOptionCopy);
             putFilteredTitle(titleOptionCopy);
 
-            // const newFilteredProducts = filteredProducts.filter( fp => fp.title !== el );
-            // setFilteredProducts(newFilteredProducts);
+            if (titleOptionCopy.length === 0) {
+                setFilter(false);
+            }
+
         }
     }
 
