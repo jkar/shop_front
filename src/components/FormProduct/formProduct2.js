@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Header from '../Header/Header';
 
-const FormProduct = ({ user, errorSuccessMessage, setErrorSuccessMessage, products, setProducts, totalPages, setTotalPages, limit }) => {
+const FormProduct = ({ logOut, user, errorSuccessMessage, setErrorSuccessMessage, products, setProducts, totalPages, setTotalPages, limit }) => {
 
     const [file, setFile] = useState(null);
     const [title, setTitle] = useState('');
@@ -79,7 +79,7 @@ const FormProduct = ({ user, errorSuccessMessage, setErrorSuccessMessage, produc
 
     return (
         <>
-            <Header user={user} />
+            <Header user={user} logOut={logOut} />
             <h3>Create Product</h3>
             <form onSubmit={onFormSubmit}>
                 <label>File Upload</label>
